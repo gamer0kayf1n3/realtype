@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RealType</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+	  #realtime {width: 100%; height: 100%; font-size: 72px;}
+    </style>
+  </head>
+  <body>
+<input id="realtime" oninput="realtype()">
+<script src="/socket.io/socket.io.js"></script>
+    <script>
+var socket = io();
+var realtime=document.getElementById('realtime')
+function realtype() {
+	socket.emit('realtime input', realtime.value);
+}
+socket.on('realtime input', function(msg) {
+        realtime.value = msg;
+      });
+    </script>
+  </body>
+</html>
